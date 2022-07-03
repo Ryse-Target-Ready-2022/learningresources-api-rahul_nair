@@ -1,0 +1,14 @@
+package com.tgt.rysetti.learningresourcesapi;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class LearningresourcesapiApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(LearningresourcesapiApplication.class, args);
+		System.out.println("Hello World");
+	}
+
+}
