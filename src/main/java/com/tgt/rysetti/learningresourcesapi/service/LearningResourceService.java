@@ -34,6 +34,56 @@ public class LearningResourceService {
 		return resources;
 	}
 	
+	private  void saveLearningResources(List<LearningResource> learningResources)
+	{
+		String delimiter = ",";
+		try {
+			File file = new File("LearningResources.csv");
+	         BufferedWriter bw = new BufferedWriter(new FileWriter(file.getName(), true));
+	         for (LearningResource lr : learningResources) {
+	                bw.newLine();
+	                StringBuffer line = new StringBuffer();
+	                line.append(lr.getId());
+	                line.append(delimiter);
+	                line.append(lr.getName());
+	                line.append(delimiter);
+	                line.append(lr.getCostPrice());
+	                line.append(delimiter);
+	                line.append(lr.getSellingPrice());
+	                line.append(delimiter);
+	                line.append(lr.getProductStatus());
+	                line.append(delimiter);
+	                line.append(lr.getCreatedDate());
+	                line.append(delimiter);
+	                line.append(lr.getPublishedDate());
+	                line.append(delimiter);
+	                line.append(lr.getRetiredDate());
+	                bw.write(line.toString());
+	            }
+	            bw.flush();
+	            bw.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		 
+		
+	}
+	
+	private  TreeMap<Double,LearningResource> sortedLearningResource()
+	{
+		List<LearningResource> resources = getLearningResources();
+		TreeMap<Double,LearningResource> map=new TreeMap<>();
+		for(LearningResource lr : resources)
+		{
+			Double cp= lr.getCostPrice();
+			Double sp= lr.getSellingPrice();
+			Double margin=(sp-cp)/sp;
+			map.put(margin, lr);
+		}
+		return map;
+	}
+
+	
 	
 	
 	private LearningResource createLearningresource(String[] str) throws ParseException
