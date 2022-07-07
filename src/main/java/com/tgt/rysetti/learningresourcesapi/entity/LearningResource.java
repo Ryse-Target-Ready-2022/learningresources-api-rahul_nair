@@ -5,7 +5,7 @@ import java.util.Date;
 public class LearningResource {
 
 	private Integer id;
-	private Integer name;
+	private String name;
 	private Double costPrice;
 	private Double sellingPrice;
 	private LearningResourceStatus productStatus;
@@ -16,7 +16,7 @@ public class LearningResource {
 	
 	//Constructors
 	
-	public LearningResource(Integer id, Integer name, Double costPrice, Double sellingPrice,
+	public LearningResource(Integer id, String name, Double costPrice, Double sellingPrice,
 			LearningResourceStatus productStatus, Date createdDate, Date publishedDate, Date retiredDate) {
 		super();
 		this.id = id;
@@ -44,11 +44,11 @@ public class LearningResource {
 		this.id = id;
 	}
 
-	public Integer getName() {
+	public String getName() {
 		return name;
 	}
 
-	public void setName(Integer name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 
