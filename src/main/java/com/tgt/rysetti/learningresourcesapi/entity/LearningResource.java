@@ -2,17 +2,37 @@ package com.tgt.rysetti.learningresourcesapi.entity;
 
 import java.util.Date;
 
-public class LearningResource {
+import javax.persistence.*;
+import java.io.Serializable;
 
-	private Integer id;
-	private String name;
-	private Double costPrice;
-	private Double sellingPrice;
-	private LearningResourceStatus productStatus;
-	private Date createdDate;
-	private Date publishedDate;
-	private Date retiredDate;
-	
+@Entity
+@Table(name = "learningresources")
+public class LearningResource implements Serializable {
+    @Id
+    @Column(name = "learning_resource_id")
+    private Integer id;
+
+    @Column(name = "learning_resource_name")
+    private String name;
+
+    @Column(name = "cost_price")
+    private Double costPrice;
+
+    @Column(name = "selling_price")
+    private Double sellingPrice;
+
+    @Column(name = "learning_resource_status")
+    @Enumerated(EnumType.STRING)
+    private LearningResourceStatus productStatus;
+
+    @Column(name = "created_date")
+    private Date createdDate;
+
+    @Column(name = "published_date")
+    private Date publishedDate;
+
+    @Column(name = "retired_date")
+    private Date retiredDate;
 	
 	//Constructors
 	
