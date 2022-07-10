@@ -2,6 +2,7 @@ package com.tgt.rysetti.learningresourcesapi.service;
 
 
 import java.util.List;
+import java.util.Optional;
 import java.util.TreeMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,10 +48,27 @@ public class LearningResourceService {
 		}
 		return map;
 	}
-
+    
+	public Optional<LearningResource> getLearningResourceById(int id)
+	{
+		return repo.findById(id);
+	}
 	
+	public String updateLearningResource(int id,LearningResource learningresource)
+	{
+		if(repo.existsById(id))
+		{
+			repo.save(learningresource);
+			return "Record updated successfully";
+		}
+		else
+			return "The record doesn't exist";
+	}
 	
-	
+	public void deleteLearningResource(int id)
+	{
+		repo.deleteById(id);
+	}
 	
 	
 	
