@@ -2,6 +2,8 @@ package com.tgt.rysetti.learningresourcesapi.service;
 
 
 import java.util.List;
+import static java.util.stream.Collectors.toList;
+
 import java.util.Optional;
 import java.util.TreeMap;
 
@@ -35,7 +37,17 @@ public class LearningResourceService {
 		
 	}
 	
-	public  TreeMap<Double,LearningResource> sortedLearningResource()
+	public List<Double> getProfitMargin(){
+        List<LearningResource> learningResources = getLearningResources();
+
+        List<Double> profitMargins = learningResources.stream()
+                                            .map(lr -> ((lr.getSellingPrice() - lr.getCostPrice())/lr.getSellingPrice()))
+                                            .collect(toList());
+
+        return profitMargins;
+    }
+	
+	public  TreeMap<Double,LearningResource> sortedLearningResourceByProfitMargin()
 	{
 		List<LearningResource> resources = getLearningResources();
 		TreeMap<Double,LearningResource> map=new TreeMap<>();
