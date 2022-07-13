@@ -38,12 +38,11 @@ public class LearningResourceServiceTests {
 	        learningResources.add(learningResourceTestCase1);
 	        learningResources.add(learningResourceTestCase2);
             
-	        //sort in descending order
 	        learningResources.sort((lr1, lr2) -> {
 	            Double profitMargin1 = (lr1.getSellingPrice() - lr1.getCostPrice())/lr1.getSellingPrice();
 	            Double profitMargin2 = (lr2.getSellingPrice() - lr2.getCostPrice())/lr2.getSellingPrice();
 
-	            return profitMargin2.compareTo(profitMargin1) ;
+	            return profitMargin1.compareTo(profitMargin2) ;
 	        });
 	        when(learningResourceRepository.findAll()).thenReturn(learningResources);
 
