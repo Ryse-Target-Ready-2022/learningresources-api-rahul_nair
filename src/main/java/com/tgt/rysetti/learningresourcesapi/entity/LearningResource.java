@@ -1,9 +1,9 @@
 package com.tgt.rysetti.learningresourcesapi.entity;
 
-import java.util.Date;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "learningresources")
@@ -26,18 +26,18 @@ public class LearningResource implements Serializable {
     private LearningResourceStatus productStatus;
 
     @Column(name = "created_date")
-    private Date createdDate;
+    private LocalDate createdDate;
 
     @Column(name = "published_date")
-    private Date publishedDate;
+    private LocalDate publishedDate;
 
     @Column(name = "retired_date")
-    private Date retiredDate;
+    private LocalDate retiredDate;
 	
 	//Constructors
 	
 	public LearningResource(Integer id, String name, Double costPrice, Double sellingPrice,
-			LearningResourceStatus productStatus, Date createdDate, Date publishedDate, Date retiredDate) {
+			LearningResourceStatus productStatus, LocalDate createdDate, LocalDate publishedDate, LocalDate retiredDate) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -96,27 +96,27 @@ public class LearningResource implements Serializable {
 		this.productStatus = productStatus;
 	}
 
-	public Date getCreatedDate() {
+	public LocalDate getCreatedDate() {
 		return createdDate;
 	}
 
-	public void setCreatedDate(Date createdDate) {
+	public void setCreatedDate(LocalDate createdDate) {
 		this.createdDate = createdDate;
 	}
 
-	public Date getPublishedDate() {
+	public LocalDate getPublishedDate() {
 		return publishedDate;
 	}
 
-	public void setPublishedDate(Date publishedDate) {
+	public void setPublishedDate(LocalDate publishedDate) {
 		this.publishedDate = publishedDate;
 	}
 
-	public Date getRetiredDate() {
+	public LocalDate getRetiredDate() {
 		return retiredDate;
 	}
 
-	public void setRetiredDate(Date retiredDate) {
+	public void setRetiredDate(LocalDate retiredDate) {
 		this.retiredDate = retiredDate;
 	}
 	
