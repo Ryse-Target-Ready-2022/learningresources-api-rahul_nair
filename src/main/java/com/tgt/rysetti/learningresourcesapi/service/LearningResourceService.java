@@ -17,10 +17,10 @@ import com.tgt.rysetti.learningresourcesapi.repository.LearningResourceRepositor
 
 @Service
 public class LearningResourceService {
-	@Autowired
-	private  LearningResourceRepository repo;
+	
+	 @Autowired
+	 private  LearningResourceRepository repo;
     
-
 
 	public  List<LearningResource>  getLearningResources()
 	{

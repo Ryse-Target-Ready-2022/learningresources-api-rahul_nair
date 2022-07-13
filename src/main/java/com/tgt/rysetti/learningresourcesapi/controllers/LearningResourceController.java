@@ -16,6 +16,7 @@ public class LearningResourceController {
 	@Autowired
 	private LearningResourceService service;
 	
+	
 	@GetMapping("/all")
 	public List<LearningResource> getAllLearningResources()
 	{
