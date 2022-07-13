@@ -40,8 +40,7 @@ public class LearningResourceService {
 	public List<Double> getProfitMargin(){
         List<LearningResource> learningResources = getLearningResources();
 
-        List<Double> profitMargins = learningResources.stream()
-                                            .map(lr -> ((lr.getSellingPrice() - lr.getCostPrice())/lr.getSellingPrice()))
+        List<Double> profitMargins = learningResources.stream().map(lr -> ((lr.getSellingPrice() - lr.getCostPrice())/lr.getSellingPrice()))
                                             .collect(toList());
 
         return profitMargins;

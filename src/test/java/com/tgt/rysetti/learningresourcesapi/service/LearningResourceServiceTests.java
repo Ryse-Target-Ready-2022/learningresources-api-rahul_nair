@@ -1,6 +1,7 @@
 package com.tgt.rysetti.learningresourcesapi.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static java.util.stream.Collectors.toList;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -32,11 +33,12 @@ public class LearningResourceServiceTests {
 	 @Test
 	    public void sortTheLearningResourceBasedOnProfitMarginInNonIncreasingOrder(){
 	        List<LearningResource> learningResources = new ArrayList<>();
-	        LearningResource learningResource1 = new LearningResource(1311, "Test Name 1", 100.0, 150.0, LearningResourceStatus.LIVE, LocalDate.now(), LocalDate.now().plusMonths(2), LocalDate.now().plusYears(4));
-	        LearningResource learningResource2 = new LearningResource(1312, "Test Name 2", 100.0, 200.0, LearningResourceStatus.LIVE, LocalDate.now(), LocalDate.now().plusMonths(3), LocalDate.now().plusYears(5));
-	        learningResources.add(learningResource1);
-	        learningResources.add(learningResource2);
-
+	        LearningResource learningResourceTestCase1 = new LearningResource(1311, "Test Name 1", 100.0, 150.0, LearningResourceStatus.LIVE, LocalDate.now(), LocalDate.now().plusMonths(2), LocalDate.now().plusYears(4));
+	        LearningResource learningResourceTestCase2 = new LearningResource(1312, "Test Name 2", 100.0, 200.0, LearningResourceStatus.LIVE, LocalDate.now(), LocalDate.now().plusMonths(3), LocalDate.now().plusYears(5));
+	        learningResources.add(learningResourceTestCase1);
+	        learningResources.add(learningResourceTestCase2);
+            
+	        //sort in descending order
 	        learningResources.sort((lr1, lr2) -> {
 	            Double profitMargin1 = (lr1.getSellingPrice() - lr1.getCostPrice())/lr1.getSellingPrice();
 	            Double profitMargin2 = (lr2.getSellingPrice() - lr2.getCostPrice())/lr2.getSellingPrice();
@@ -50,6 +52,24 @@ public class LearningResourceServiceTests {
 	        = new ArrayList<LearningResource>(learningResourcesSorted.values());
 	    
 	        assertEquals(learningResources, sortedLearningResourcesList, "The learning resources are not sorted by profit margin");
+	    }
+	 
+	 @Test
+	    public void getProfitMarginsOfAllTheAvailableLearningResources(){
+	        List<LearningResource> learningResources = new ArrayList<>();
+	        LearningResource learningResourceTestCase1 = new LearningResource(1311, "Test Name 1", 100.0, 150.0, LearningResourceStatus.LIVE, LocalDate.now(), LocalDate.now().plusMonths(2), LocalDate.now().plusYears(4));
+	        LearningResource learningResourceTestCase2 = new LearningResource(1312, "Test Name 2", 100.0, 200.0, LearningResourceStatus.LIVE, LocalDate.now(), LocalDate.now().plusMonths(3), LocalDate.now().plusYears(5));
+	        learningResources.add(learningResourceTestCase1);
+	        learningResources.add(learningResourceTestCase2);
+
+	        List<Double> expectedProfitMargins = learningResources.stream()
+	                .map(lr -> ((lr.getSellingPrice() - lr.getCostPrice())/lr.getSellingPrice()))
+	                .collect(toList());
+
+	        when(learningResourceRepository.findAll()).thenReturn(learningResources);
+
+	        List<Double> actualProfitMargins = learningResourceService.getProfitMargin();
+	        assertEquals(expectedProfitMargins, actualProfitMargins, "The profit margins are wrong");
 	    }
 	
 	@Test
